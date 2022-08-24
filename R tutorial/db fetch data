@@ -1,0 +1,6 @@
+install.packages('RMySQL')
+require(RMySQL)
+
+con <- dbConnect(RMySQL::MySQL(), host = "localhost",dbname="rdata",user = "root", password = "")
+test_extraction <- dbReadTable(con, "users") 
+print (test_extraction);
