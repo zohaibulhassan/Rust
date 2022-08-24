@@ -1,0 +1,40 @@
+
+
+install.packages('RMySQL')
+require(RMySQL)
+
+con <- dbConnect(RMySQL::MySQL(), host = "localhost",dbname="rdata",user = "root", password = "")
+
+users <- dbReadTable(con, "users") 
+
+print (users);
+
+dbSendQuery(con,
+            "insert into users(id,name,age,status) values(null,'aleem','22','Active')"
+)
+
+dbSendQuery(con,
+            "UPDATE users SET name = 'tameez nawab', `age` = '29', `status` = 'In-active' WHERE users.id = 4;"
+)
+
+dbSendQuery(con,
+            "DELETE FROM users WHERE users.id = 3"
+)
+
+install.packages("shiny")
+library(shiny)
+
+ui <- fluidPage(
+  titlePanel("My Shiny App"),
+  sidebarLayout(
+    sidebarPanel(),
+    mainPanel(
+      h1("First level title"),
+      h2("Second level title"),
+      h3("Third level title"),
+      h4("Fourth level title"),
+      h5("Fifth level title"),
+      h6("Sixth level title")
+    )
+  )
+)
